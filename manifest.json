@@ -4,6 +4,20 @@
   "version": "1.0",
   "description": "Bookmark your reading position in AI chats",
   "permissions": ["activeTab", "scripting"],
+  "commands": {
+    "set-bookmark": {
+      "suggested_key": {
+        "default": "Alt+B"
+      },
+      "description": "Set bookmark at current position"
+    },
+    "go-to-bookmark": {
+      "suggested_key": {
+        "default": "Alt+G"
+      },
+      "description": "Jump back to bookmark"
+    }
+  },
   "content_scripts": [
     {
       "matches": [
@@ -16,7 +30,16 @@
       "js": ["content.js"]
     }
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["bookmark.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
