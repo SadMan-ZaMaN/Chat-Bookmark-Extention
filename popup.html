@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <style>
-    body { width: 200px; padding: 12px; font-family: sans-serif; }
-    button {
-      width: 100%; padding: 8px; margin: 4px 0;
-      border: none; border-radius: 8px;
-      cursor: pointer; font-size: 14px; font-weight: bold;
+    body {
+      width: 210px;
+      padding: 14px;
+      font-family: sans-serif;
+      background: #1e1e2e;
+      color: white;
+      margin: 0;
     }
-    #setBtn { background: #ff6b35; color: white; }
-    #goBtn  { background: #1a73e8; color: white; }
-    p { font-size: 11px; color: #888; margin-top: 10px; }
+    h4 {
+      margin: 0 0 10px 0;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    button {
+      width: 100%;
+      padding: 9px;
+      margin: 4px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    #setBtn    { background: #ff6b35; color: white; }
+    #goBtn     { background: #1a73e8; color: white; }
+    #removeBtn { background: #444; color: #ccc; }
+    p {
+      font-size: 10px;
+      color: #666;
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    #status {
+      font-size: 11px;
+      color: #0f0;
+      text-align: center;
+      margin-top: 6px;
+      min-height: 14px;
+    }
   </style>
 </head>
 <body>
-  <button id="setBtn">📍 Set Bookmark (Alt+B)</button>
-  <button id="goBtn">🔁 Go to Bookmark (Alt+G)</button>
-  <p>Works on Claude, ChatGPT, Gemini, DeepSeek</p>
-  <script>
-    function send(action) {
-      chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          files: ['content.js']
-        }, () => {
-          chrome.tabs.sendMessage(tabs[0].id, { action });
-        });
-      });
-    }
-    document.getElementById('setBtn').onclick = () => send('set');
-    document.getElementById('goBtn').onclick = () => send('go');
-  </script>
+  <h4>Chat Bookmark</h4>
+  <button id="setBtn">[+] Set Bookmark (Alt+B)</button>
+  <button id="goBtn">[>] Go to Bookmark (Alt+G)</button>
+  <button id="removeBtn">[x] Remove Bookmark (Alt+R)</button>
+  <div id="status"></div>
+  <p>Hover mouse where you want<br/>the bookmark, then press Alt+B</p>
+  <script src="popup.js"></script>
 </body>
 </html>

@@ -8,7 +8,8 @@ How to install it in Chrome
 
 
 How to use it
-        Action                          ShortcutSet 
-bookmark at current position            Alt + BJump 
-back to bookmark                        Alt + G
-Or use the popup buttons            Click extension icon
+        Action             ShortcutSet                      Also
+    Set Bookmark             Alt + B                    Popup Button
+Jump back to bookmark        Alt + G                    Popup button
+    Remove bookmark          Alt + R                 Click the PNG image
+

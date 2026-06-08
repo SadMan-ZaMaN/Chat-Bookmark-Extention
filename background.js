@@ -7,5 +7,8 @@ chrome.commands.onCommand.addListener((command) => {
     if (command === 'go-to-bookmark') {
       chrome.tabs.sendMessage(tabs[0].id, { action: 'go' });
     }
+    if (command === 'remove-bookmark') {
+      chrome.tabs.sendMessage(tabs[0].id, { action: 'remove' });
+    }
   });
 });

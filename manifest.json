@@ -16,6 +16,12 @@
         "default": "Alt+G"
       },
       "description": "Jump back to bookmark"
+    },
+    "remove-bookmark": {
+      "suggested_key": {
+        "default": "Alt+R"
+      },
+      "description": "Remove bookmark"
     }
   },
   "content_scripts": [
