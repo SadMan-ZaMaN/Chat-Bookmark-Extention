@@ -1,0 +1,14 @@
+How to install it in Chrome
+
+1.Open Chrome and go to chrome://extensions
+2.Turn on Developer mode (top right toggle)
+3.Click "Load unpacked"
+4.Select your chat-bookmark-extension folder
+5.Done! The extension icon will appear in your toolbar
+
+
+How to use it
+        Action                          ShortcutSet 
+bookmark at current position            Alt + BJump 
+back to bookmark                        Alt + G
+Or use the popup buttons            Click extension icon
