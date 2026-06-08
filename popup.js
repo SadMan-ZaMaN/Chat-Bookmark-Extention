@@ -8,24 +8,29 @@ function send(action) {
       return;
     }
     const tabId = tabs[0].id;
-    status.textContent = 'Tab: ' + tabId;
 
     chrome.tabs.sendMessage(tabId, { action: action }, (response) => {
       if (chrome.runtime.lastError) {
         status.textContent = 'Injecting...';
+        // Inject BOTH files
         chrome.scripting.executeScript(
           { target: { tabId: tabId }, files: ['content.js'] },
           () => {
-            if (chrome.runtime.lastError) {
-              status.textContent = 'Inject failed: ' + chrome.runtime.lastError.message;
-              return;
-            }
-            setTimeout(() => {
-              chrome.tabs.sendMessage(tabId, { action: action }, () => {
-                status.textContent = 'Done!';
-                setTimeout(() => status.textContent = '', 2000);
-              });
-            }, 300);
+            chrome.scripting.executeScript(
+              { target: { tabId: tabId }, files: ['navigate.js'] },
+              () => {
+                if (chrome.runtime.lastError) {
+                  status.textContent = 'Inject failed: ' + chrome.runtime.lastError.message;
+                  return;
+                }
+                setTimeout(() => {
+                  chrome.tabs.sendMessage(tabId, { action: action }, () => {
+                    status.textContent = 'Done!';
+                    setTimeout(() => status.textContent = '', 2000);
+                  });
+                }, 300);
+              }
+            );
           }
         );
       } else {
@@ -39,3 +44,5 @@ function send(action) {
 document.getElementById('setBtn').addEventListener('click', () => send('set'));
 document.getElementById('goBtn').addEventListener('click', () => send('go'));
 document.getElementById('removeBtn').addEventListener('click', () => send('remove'));
+document.getElementById('topBtn').addEventListener('click', () => send('top'));
+document.getElementById('botBtn').addEventListener('click', () => send('bottom'));

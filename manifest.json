@@ -22,6 +22,12 @@
         "default": "Alt+R"
       },
       "description": "Remove bookmark"
+    },
+    "go-to-top": {
+    "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "Go to top of chat"
     }
   },
   "content_scripts": [
@@ -33,7 +39,7 @@
         "*://gemini.google.com/*",
         "*://chat.deepseek.com/*"
       ],
-      "js": ["content.js"]
+      "js": ["content.js", "navigate.js"]
     }
   ],
   "background": {

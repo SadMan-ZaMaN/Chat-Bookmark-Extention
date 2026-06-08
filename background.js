@@ -10,5 +10,11 @@ chrome.commands.onCommand.addListener((command) => {
     if (command === 'remove-bookmark') {
       chrome.tabs.sendMessage(tabs[0].id, { action: 'remove' });
     }
+    if (command === 'go-to-top') {
+      chrome.tabs.sendMessage(tabs[0].id, { action: 'top' });
+    }
+    if (command === 'go-to-bottom') {
+      chrome.tabs.sendMessage(tabs[0].id, { action: 'bottom' });
+    }
   });
 });
