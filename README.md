@@ -84,7 +84,7 @@ This extension is not on the Chrome Web Store yet. Install it manually:
 
 
 ## File Structure
-
+'''
 chat-bookmark-extension/
 ├── manifest.json       — Extension config and permissions
 ├── background.js       — Handles keyboard shortcuts
@@ -93,7 +93,7 @@ chat-bookmark-extension/
 ├── popup.html          — Popup UI layout
 ├── popup.js            — Popup button logic
 └── bookmark.png        — Your bookmark image
-
+'''
 
 
 
