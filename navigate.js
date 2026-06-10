@@ -1,21 +1,26 @@
+function getScrollContainer() {
+  const claudeContainer = document.querySelector('[class*="group/scroll-root"]');
+  if (claudeContainer) return claudeContainer;
+
+  const chatgptContainer = document.querySelector('[class*="overflow-y-auto"]');
+  if (chatgptContainer && chatgptContainer.scrollHeight > chatgptContainer.clientHeight) {
+    return chatgptContainer;
+  }
+
+  return document.documentElement;
+}
+
 function getFirstMessage() {
-  // All these sites use similar structures for chat messages
   const selectors = [
-    // Claude
     '[data-testid="human-turn"]',
     '[data-testid="assistant-turn"]',
-    // ChatGPT
     '[data-message-id]',
-    // Gemini
     '[class*="conversation-turn"]',
-    '[class*="message"]',
-    // Generic fallback
     'article',
   ];
-
   for (const selector of selectors) {
     const els = document.querySelectorAll(selector);
-    if (els.length > 0) return els[0]; // first message
+    if (els.length > 0) return els[0];
   }
   return null;
 }
@@ -26,29 +31,23 @@ function getLastMessage() {
     '[data-testid="assistant-turn"]',
     '[data-message-id]',
     '[class*="conversation-turn"]',
-    '[class*="message"]',
     'article',
   ];
-
   for (const selector of selectors) {
     const els = document.querySelectorAll(selector);
-    if (els.length > 0) return els[els.length - 1]; // last message
+    if (els.length > 0) return els[els.length - 1];
   }
   return null;
 }
 
 function goToTop() {
-  const el = getFirstMessage();
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  const container = getScrollContainer();
+  container.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function goToBottom() {
-  const el = getLastMessage();
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  const container = getScrollContainer();
+  container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
 }
 
 chrome.runtime.onMessage.addListener((msg) => {
